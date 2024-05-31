@@ -1,0 +1,200 @@
+@import url("base.css");
+
+:root {
+  --color-glow-dark: #f5ca72;
+  --color-glow: #fedb94;
+  --color-text: #4d422d;
+  --color-background: linear-gradient(146deg, #f9fafb 0%, #fedb94 100%);
+}
+
+body {
+  position: relative;
+  margin: 0;
+  font-family: "Noto Sans", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+    sans-serif;
+  min-height: 100vh;
+  color: var(--color-text);
+  background: var(--color-background);
+}
+
+header {
+  text-align: center;
+
+  position: relative;
+  z-index: 100;
+  margin: 0 0 1rem;
+
+  & h1 {
+    padding-top: 1rem;
+
+    font-weight: 900;
+    font-size: 4rem;
+    line-height: 4rem;
+    font-family: cookie, cursive;
+    filter: invert(1) grayscale(1) contrast(9) drop-shadow(0.05em 0.05em orange);
+  }
+}
+
+main:after {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 260px;
+  background-image: url("assets/wave.svg");
+  background-position: bottom;
+  background-repeat: no-repeat;
+  animation: wave 2s ease-in-out infinite alternate;
+  mix-blend-mode: color;
+  opacity: .8;
+}
+main {
+  background-image: url("assets/wave.svg");
+  background-position: bottom;
+  background-repeat: no-repeat;
+  animation: wave-bot 2s ease-in-out infinite alternate;
+
+
+  padding-bottom: 4rem;
+
+  & section:first-of-type {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("assets/img/publ_beach.jpg");
+    background-image: image-set(
+      url("assets/img/publ_beach_1200.avif") type("image/avif"),
+      url("assets/img/publ_beach_1200.webp") type("image/wepb")
+    );
+
+    padding: 10rem 0 5rem;
+    margin-top: -10rem;
+    position: relative;
+
+    color: white;
+
+    & h2 {
+      position: relative;
+      text-align: center;
+      padding: 1rem 2rem 0;
+    }
+    
+    & p {
+      position: relative;
+      padding: 0.5rem 3rem;
+      font-weight: 600;
+    }
+  }
+  & section:first-of-type:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 10rem 1.5rem 4rem;
+
+    height: -webkit-fill-available;
+
+    background: rgba(151, 183, 145, 0.36);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(6.5px);
+    border: 1px solid rgba(151, 183, 145, 0.47);
+    border-radius: 0.625rem;
+  }
+
+  & section:last-of-type {
+    background-image: url(assets/wavetop.svg);
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    animation: wave-top 6s ease-in-out infinite alternate;
+
+    padding: 0 2rem 0;
+
+    & h2 {
+      text-align: center;
+      padding: 1rem 0;
+
+      font-weight: 900;
+      font-size: 3rem;
+      line-height: 3rem;
+      filter: contrast(1);
+    }
+
+    & ul {
+      padding: 0;
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(255px, 1fr));
+      grid-column-gap: 2rem;
+      grid-row-gap: 2rem;
+
+      & li:hover {
+        transform: scale(1.025);
+        color: black;
+      }
+      & li {
+        border-radius: 20px;
+        padding: 1rem;
+        cursor: pointer;
+
+        background: #f1e7ca;
+        box-shadow: 20px 20px 60px #cdc4ac, -20px -20px 60px #ffffe8;
+
+        --beach-img: image-set(
+          url("assets/img/publ_beach_600.avif") type("image/avif"),
+          url("assets/img/publ_beach_600.webp") type("image/wepb")
+        );
+
+        & h3::after {
+          content: "";
+          margin: 0.5rem 0;
+          display: block;
+          min-height: 10rem;
+          border-radius: 0.5rem;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-image: url("assets/img/publ_beach.jpg");
+          background-image: var(--beach-img);
+        }
+      }
+    }
+  }
+
+}
+
+@keyframes wave {
+  from {
+    background-position: bottom;
+    background-size: 100%;
+  }
+  
+  to {
+    background-position:  bottom 16px right 0px;
+    background-size: 120%;
+  }
+}
+@keyframes wave-bot {
+  from {
+    background-position: bottom;
+  }
+
+  to {
+    background-position:  bottom -6px right 0px;
+  }
+}
+@keyframes wave-top {
+  from {
+    background-position: top;
+    background-size: 100%;
+  }
+
+  to {
+    background-position:  top -8px right 0px;
+    background-size: 160%;
+  }
+}
