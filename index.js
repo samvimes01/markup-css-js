@@ -60,9 +60,12 @@ function addDialog() {
   contents.classList.add("dialog-contents");
 
   close.addEventListener("click", function () {
+    this.closest("dialog").close();
+  });
+
+  dialog.addEventListener("close", () => {
     title.innerHTML = "";
     contents.innerHTML = "";
-    this.closest("dialog").close();
   });
 
   header.appendChild(title);

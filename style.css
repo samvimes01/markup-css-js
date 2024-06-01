@@ -1,10 +1,12 @@
 @import url("base.css");
+@import url("dialog.css");
 
 :root {
   --color-glow-dark: #f5ca72;
   --color-glow: #fedb94;
   --color-text: #4d422d;
   --color-background: linear-gradient(146deg, #f9fafb 0%, #fedb94 100%);
+  --header-height: 18rem;
 }
 
 body {
@@ -21,9 +23,15 @@ body {
 header {
   text-align: center;
 
-  position: relative;
-  z-index: 100;
-  margin: 0 0 1rem;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url("assets/img/publ_beach.jpg");
+  background-image: image-set(
+    url("assets/img/publ_beach_1200.avif") type("image/avif"),
+    url("assets/img/publ_beach_1200.webp") type("image/wepb")
+  );
+  min-height: calc(var(--header-height)*1.45);
 
   & h1 {
     padding-top: 1rem;
@@ -36,74 +44,57 @@ header {
   }
 }
 
+
 main:after {
   content: "";
   display: block;
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 360px;
+  height: 390px;
   background-image: url("assets/wave.svg");
   background-position: bottom;
   background-repeat: no-repeat;
   animation: wave 2s ease-in-out infinite alternate;
   mix-blend-mode: color;
-  opacity: .8;
+  opacity: 0.8;
   pointer-events: none;
 }
 main {
+  display: flex;
+  flex-direction: column;
+
   background-image: url("assets/wave.svg");
   background-position: bottom;
   background-repeat: no-repeat;
   animation: wave-bot 2s ease-in-out infinite alternate;
 
-
-  padding-bottom: 4rem;
+  padding-bottom: 8rem;
 
   & section:first-of-type {
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-image: url("assets/img/publ_beach.jpg");
-    background-image: image-set(
-      url("assets/img/publ_beach_1200.avif") type("image/avif"),
-      url("assets/img/publ_beach_1200.webp") type("image/wepb")
-    );
-
-    padding: 10rem 0 5rem;
-    margin-top: -10rem;
-    position: relative;
-
-    color: white;
-
-    & h2 {
-      position: relative;
-      text-align: center;
-      padding: 1rem 2rem 0;
-    }
-    
-    & p {
-      position: relative;
-      padding: 0.5rem 3rem;
-      font-weight: 600;
-    }
-  }
-  & section:first-of-type:before {
-    content: "";
-    display: block;
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    margin: 10rem 1.5rem 4rem;
+    align-self: center;
 
-    height: -webkit-fill-available;
+    top: 152px;
+    padding: 0.25rem 0.5rem;
+    margin: 0;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    text-align: center;
+    color: white;
 
     background: rgba(151, 183, 145, 0.36);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(6.5px);
     border: 1px solid rgba(151, 183, 145, 0.47);
     border-radius: 0.625rem;
+
+    & p {
+      font-weight: 600;
+    }
   }
 
   & section:last-of-type {
@@ -111,13 +102,16 @@ main {
     background-position: top;
     background-repeat: no-repeat;
     background-size: cover;
-    animation: wave-top 6s ease-in-out infinite alternate;
+    animation: wave-top 8s ease-in-out infinite alternate;
 
     padding: 0 2rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     & h2 {
       text-align: center;
-      padding: 1rem 0;
+      padding: 2.5rem 0 0;
 
       font-weight: 900;
       font-size: 3rem;
@@ -126,7 +120,7 @@ main {
     }
 
     & ul {
-      padding: 0;
+      padding: 2.5rem 0 0;
       list-style: none;
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -136,6 +130,9 @@ main {
       & li:hover {
         transform: scale(1.025);
         color: black;
+      }
+      & li:active {
+        border: 1px solid var(--color-glow-dark);
       }
       & li {
         border-radius: 20px;
@@ -149,6 +146,7 @@ main {
           url("assets/img/publ_beach_600.avif") type("image/avif"),
           url("assets/img/publ_beach_600.webp") type("image/wepb")
         );
+        transition: all .2s, border 0s;
 
         & h3::after {
           content: "";
@@ -165,65 +163,46 @@ main {
       }
     }
   }
-
 }
 
-.dialog-box {
-  align-self: center;
-  justify-self: center;
-  border: none;
-  border-radius: 1rem;
-  min-width: 380px;
-  max-width: 580px;
 
-  background: #f1e7ca;
-  box-shadow: 20px 20px 60px #cdc4ac, -20px -20px 60px #ffffe8;
-
-  & .dialog-header {
-    display: flex;
-    justify-content: space-between;
+@media (min-width: 430px) {
+  header {
+    min-height: calc(var(--header-height)*1.35);
   }
-  & .dialog-close:hover {
-    background-color: rgb(232, 70, 52);
-  }
-  & .dialog-close:active {
-    background-color: rgb(232, 70, 52);
-    border: 2px solid #960305;
-  }
-  & .dialog-close {
-    border: none;
-    background-color: salmon;
-    border-radius: 50%;
-    min-width: 36px;
-    line-height: 20px;
-    outline: none;
-    cursor: pointer;
-  }
-  & .dialog-contents {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin-top: 1rem;
-    font-size: 20px;
-    line-height: 24px;
-
-    img {
-      object-fit: cover;
-      width: 100%;
-      border-radius: 0.5rem;
+  main {
+    & section:first-of-type {
+      top: 162px;
+      padding: 0.5rem 1rem;
+      margin: 0 1rem;
     }
   }
 }
-::backdrop {
-  background-image: linear-gradient(
-    45deg,
-    magenta,
-    rebeccapurple,
-    dodgerblue,
-    green
-  );
-  opacity: 0.25;
+@media (min-width: 648px) {
+  header {
+    min-height: calc(var(--header-height)*1.2);
+  }
+  main {
+    & section:first-of-type {
+      top: 132px;
+      padding: 1rem 2rem;
+      margin: 0 2rem;
+    }
+  }
+}
+@media (min-width: 948px) {
+  header {
+    min-height: var(--header-height);
+  }
+  main {
+    & section:first-of-type {
+      top: 112px;
+      padding: 1rem 3rem;
+      margin: 0 4rem;
+      min-height: calc(var(--header-height) / 2);
+      max-width: 1408px;
+    }
+  }
 }
 
 @keyframes wave {
@@ -231,9 +210,9 @@ main {
     background-position: bottom;
     background-size: 100%;
   }
-  
+
   to {
-    background-position:  bottom 16px right 0px;
+    background-position: bottom 16px right 0px;
     background-size: 120%;
   }
 }
@@ -243,7 +222,7 @@ main {
   }
 
   to {
-    background-position:  bottom -6px right 0px;
+    background-position: bottom -6px right 0px;
   }
 }
 @keyframes wave-top {
@@ -253,19 +232,9 @@ main {
   }
 
   to {
-    background-position:  top -8px right 0px;
+    background-position: top -8px right 0px;
     background-size: 160%;
   }
-}
-
-.btn-visit {
-  background-color: rgba(151, 183, 145, 0.47);;
-  padding: 7px;
-  width: 100px;
-  animation: btn-bounce 4s infinite;
-  cursor: pointer;
-  border: none;
-  border-radius: 2px;
 }
 
 @keyframes btn-bounce {
